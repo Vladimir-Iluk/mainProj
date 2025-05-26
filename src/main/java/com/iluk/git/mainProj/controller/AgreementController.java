@@ -16,7 +16,7 @@ public class AgreementController {
     @GetMapping("/agreement")
     public String showAgreement(Model model) {
         var agreements = agreementRepository.findAll();
-        model.addAttribute("agreements", agreements);
-        return "/agreement";
+        model.addAttribute("agreementsList", agreements);
+        return "page/agreement";
     }
 }

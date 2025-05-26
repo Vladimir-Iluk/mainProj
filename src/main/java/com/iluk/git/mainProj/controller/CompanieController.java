@@ -16,7 +16,7 @@ public class CompanieController {
     @GetMapping("/companie")
     public String showCompanie(Model model) {
         var companies = companieRepository.findAll();
-        model.addAttribute("companies", companies);
-        return "/companie";
+        model.addAttribute("comps", companies);
+        return "page/companie";
     }
 }

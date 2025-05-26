@@ -26,6 +26,6 @@ public class Agreement {
     @ToString.Exclude
     private Companie company;
 
-    private String position;
+    private String pos;
     private BigDecimal commission;
 }
