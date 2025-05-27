@@ -1,4 +1,6 @@
 @param gg.jte.Content content
+@param gg.jte.Content headContent = @``
+@param gg.jte.Content scripts = @``
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +33,7 @@
             color: #004080;
         }
     </style>
+    ${headContent}
 </head>
 <body>
 <h1>Welcome to My Website</h1>
@@ -41,5 +44,6 @@
 
 </div>
 ${content}
+${scripts}
 </body>
 </html>

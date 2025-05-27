@@ -17,6 +17,6 @@ public class EmployerController {
     public String showEmplyoer(Model model) {
         var employers = employerRepository.findAll();
         model.addAttribute("empls", employers);
-        return "page/index";
+        return "page/employer";
     }
 }

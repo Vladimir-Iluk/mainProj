@@ -28,10 +28,10 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/signup/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
-                        .requestMatchers("/employer/**").hasRole(Role.EMPLOYER.name())
-                        .requestMatchers("/company/**").hasRole(Role.COMPANY.name())
+                        .requestMatchers("/", "/siqnup", "/login", "/error").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/employer/**").hasAuthority("EMPLOYER")
+                        .requestMatchers("/company/**").hasAuthority("COMPANY")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

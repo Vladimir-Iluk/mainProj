@@ -15,7 +15,23 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication)
             throws ServletException, IOException {
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
 
-        response.sendRedirect("/");
+        switch (role) {
+            case "ADMIN":
+                response.sendRedirect("/admin/dashboard");
+                break;
+            case "EMPLOYER":
+                response.sendRedirect("/index");
+                break;
+            case "COMPANY":
+                response.sendRedirect("/companie");
+                break;
+            default:
+                response.sendRedirect("/");
+                break;
+        }
+
     }
+
 }
