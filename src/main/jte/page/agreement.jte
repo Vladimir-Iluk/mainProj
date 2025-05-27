@@ -1,4 +1,4 @@
-@import com.iluk.git.mainProj.data.Agreement
+@import com.iluk.git.mainProj.data.Entitys.Agreement
 @import java.util.List
 @param List<Agreement> agreementsList
 @template.layout.main(content = @`

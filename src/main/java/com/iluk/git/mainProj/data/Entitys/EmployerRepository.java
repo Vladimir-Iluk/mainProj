@@ -1,4 +1,4 @@
-package com.iluk.git.mainProj.data;
+package com.iluk.git.mainProj.data.Entitys;
 
 import org.springframework.data.repository.CrudRepository;
 

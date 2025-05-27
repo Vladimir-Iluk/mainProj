@@ -1,4 +1,4 @@
-@import com.iluk.git.mainProj.data.Employer
+@import com.iluk.git.mainProj.data.Entitys.Employer
 @import java.util.List
 @param List<Employer> empls
 @template.layout.main(content = @`

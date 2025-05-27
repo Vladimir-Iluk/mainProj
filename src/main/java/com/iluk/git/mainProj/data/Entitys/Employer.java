@@ -1,4 +1,4 @@
-package com.iluk.git.mainProj.data;
+package com.iluk.git.mainProj.data.Entitys;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class Employer {
+public class Employer  {
 
     @Id
     @GeneratedValue

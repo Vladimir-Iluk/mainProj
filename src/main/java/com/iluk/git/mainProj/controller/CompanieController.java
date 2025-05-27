@@ -1,7 +1,7 @@
 package com.iluk.git.mainProj.controller;
 
 
-import com.iluk.git.mainProj.data.CompanieRepository;
+import com.iluk.git.mainProj.data.Entitys.CompanieRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
