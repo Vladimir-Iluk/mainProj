@@ -16,7 +16,7 @@ public class EmployerController {
     @GetMapping("/employer")
     public String showEmplyoer(Model model) {
         var employers = employerRepository.findAll();
-        model.addAttribute("employers", employers);
-        return "/employer";
+        model.addAttribute("empls", employers);
+        return "page/index";
     }
 }

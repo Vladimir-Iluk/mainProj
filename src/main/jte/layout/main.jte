@@ -34,7 +34,6 @@
 <body>
 <h1>Welcome to My Website</h1>
 <div class="navigation">
-    <a href="home">Home</a>
     <a href="agreement">Agreement</a>
     <a href="companie">Companie</a>
     <a href="employer">Employer</a>

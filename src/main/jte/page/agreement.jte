@@ -16,7 +16,7 @@
                     <p>Company activity - ${agreement.getCompany().getActivityType()}</p>
                     <p>Company address - ${agreement.getCompany().getAddress()}</p>
                     <p>Company phone - ${agreement.getCompany().getPhone()}</p>
-                    <p>Agreement position - ${agreement.getPosition()}</p>
+                    <p>Agreement position - ${agreement.getPos()}</p>
                     <p>Agreement commision - ${agreement.getCommission()}</p>
 
                 </div>

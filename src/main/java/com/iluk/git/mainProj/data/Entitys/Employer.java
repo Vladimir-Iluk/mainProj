@@ -36,7 +36,7 @@ public class Employer  {
     @Column(name = "expected_salary")
     private BigDecimal expectedSalary;
 
-    @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empl", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Agreement> Agreements;
 }
