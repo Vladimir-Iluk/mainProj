@@ -15,7 +15,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication)
             throws ServletException, IOException {
-        // Redirect після логіну
+
         response.sendRedirect("/");
     }
 }

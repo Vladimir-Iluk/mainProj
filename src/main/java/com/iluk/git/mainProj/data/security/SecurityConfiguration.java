@@ -2,6 +2,7 @@ package com.iluk.git.mainProj.data.security;
 
 import com.iluk.git.mainProj.data.user.PlatformUserDetailsService;
 import com.iluk.git.mainProj.data.user.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -16,45 +17,36 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration {
     private final PlatformUserDetailsService userDetailsService;
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-    public SecurityConfiguration(PlatformUserDetailsService userDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
-        this.userDetailsService = userDetailsService;
-        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
-    }
+    private final PasswordEncoder passwordEncoder;
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/", "/signup/**").permitAll();
-                    registry.requestMatchers("/admin/**").hasRole(Role.ADMIN.name());
-                    registry.requestMatchers("/employer/**").hasRole(Role.EMPLOYER.name());
-                    registry.requestMatchers("/company/**").hasRole(Role.COMPANY.name());
-                    registry.anyRequest().authenticated();
-                })
-                .formLogin(httpSecurityFormLoginConfigurer -> {
-                    httpSecurityFormLoginConfigurer
-                            .loginPage("/login")
-                            .successHandler(customAuthenticationSuccessHandler)
-                            .permitAll();
-                })
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/signup/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
+                        .requestMatchers("/employer/**").hasRole(Role.EMPLOYER.name())
+                        .requestMatchers("/company/**").hasRole(Role.COMPANY.name())
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .successHandler(customAuthenticationSuccessHandler)
+                        .permitAll()
+                )
                 .build();
     }
+
     @Bean
-    public PlatformUserDetailsService userDetailsService() {
-        return userDetailsService;
-    }
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        return daoAuthenticationProvider;
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
     }
 }

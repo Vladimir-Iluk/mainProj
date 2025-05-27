@@ -1,5 +1,8 @@
 package com.iluk.git.mainProj.data.user;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.stereotype.Service;
+
+@Service
 public class PlatformUserDetailsService implements UserDetailsService {
     private final PlatformUserRepository platformUserRepository;
     public PlatformUserDetailsService(PlatformUserRepository platformUserRepository) {
