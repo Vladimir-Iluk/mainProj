@@ -16,7 +16,7 @@ public class PlatformUserDetailsService implements UserDetailsService {
             return User.builder()
                     .username(platformUserObject.getUsername())
                     .password(platformUserObject.getPassword())
-                    .roles(platformUserObject.getRole().name())
+                    .authorities(platformUserObject.getRole().name())
                     .build();
         } else {
             throw new UsernameNotFoundException(username);
