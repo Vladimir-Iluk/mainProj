@@ -64,4 +64,54 @@ public class AgreementController {
         }
 
     }
+    @GetMapping("/agreement/edit")
+    public String showEditAgreementForm(@RequestParam Long id, Model model) {
+        Agreement agreement = agreementRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+        model.addAttribute("agreement", agreement);
+        model.addAttribute("empls", employerRepository.findAll());
+        model.addAttribute("comps", companieRepository.findAll());
+        return "page/agreementEdit";
     }
+
+    @PostMapping("/agreement/edit")
+    public String editAgreement(
+            @RequestParam Long id,
+            @RequestParam Long employerId,
+            @RequestParam Long companyId,
+            @RequestParam String pos,
+            @RequestParam BigDecimal commission) {
+        try {
+            Agreement agreement = agreementRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+
+            Employer employer = employerRepository.findById(employerId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid employer ID"));
+            Companie company = companieRepository.findById(companyId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid company ID"));
+
+            agreement.setEmpl(employer);
+            agreement.setCompany(company);
+            agreement.setPos(pos);
+            agreement.setCommission(commission);
+
+            agreementRepository.save(agreement);
+            return "redirect:/agreement";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/companie";
+        }
+
+    }
+    @GetMapping("/agreement/delete")
+    public String deleteAgreement(@RequestParam Long id) {
+        try {
+            agreementRepository.deleteById(id);
+            return "redirect:/agreement";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/agreement";
+        }
+    }
+
+}

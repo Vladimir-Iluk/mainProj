@@ -49,4 +49,46 @@ public class CompanieController {
         }
 
     }
+    @GetMapping("/companie/edit")
+    public String showEditCompanieForm(@RequestParam Long id, Model model) {
+        Companie company = companieRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+        model.addAttribute("companie", company);
+        return "page/companieEdit";
+    }
+
+    @PostMapping("/companie/edit")
+    public String editCompanie(
+            @RequestParam Long id,
+            @RequestParam String name,
+            @RequestParam String activityType,
+            @RequestParam String address,
+            @RequestParam String phone) {
+        try {
+            Companie company = companieRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+
+            company.setName(name);
+            company.setActivityType(activityType);
+            company.setAddress(address);
+            company.setPhone(phone);
+
+            companieRepository.save(company);
+            return "redirect:/companie";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/companie";
+        }
+
+    }
+    @GetMapping("/companie/delete")
+    public String deleteCompanie(@RequestParam Long id) {
+        try {
+            companieRepository.deleteById(id);
+            return "redirect:/companie";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/companie";
+        }
+    }
 }

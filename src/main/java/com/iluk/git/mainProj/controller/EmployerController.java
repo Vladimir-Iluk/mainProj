@@ -59,4 +59,52 @@ public class EmployerController {
             return "redirect:/employer";
         }
     }
+    @GetMapping("/employer/edit")
+    public String showEditEmployerForm(@RequestParam Long id, Model model) {
+        Employer employer = employerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+        model.addAttribute("empl", employer);
+        return "page/employerEdit";
+    }
+
+    @PostMapping("/employer/edit")
+    public String editEmployer(
+            @RequestParam Long id,
+            @RequestParam String lastName,
+            @RequestParam String firstName,
+            @RequestParam String middleName,
+            @RequestParam String qualification,
+            @RequestParam String activityType,
+            @RequestParam String otherInfo,
+            @RequestParam BigDecimal expectedSalary) {
+        try {
+            Employer employer = employerRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+
+            employer.setLastName(lastName);
+            employer.setFirstName(firstName);
+            employer.setMiddleName(middleName);
+            employer.setQualification(qualification);
+            employer.setActivityType(activityType);
+            employer.setOtherInfo(otherInfo);
+            employer.setExpectedSalary(expectedSalary);
+
+            employerRepository.save(employer);
+            return "redirect:/employer";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/companie";
+        }
+
+    }
+    @GetMapping("/employer/delete")
+    public String deleteEmployer(@RequestParam Long id) {
+        try {
+            employerRepository.deleteById(id);
+            return "redirect:/employer";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/employer";
+        }
+    }
 }
