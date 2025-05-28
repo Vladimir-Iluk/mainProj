@@ -16,7 +16,7 @@ content = @`
             </div>
             <button type="submit" class="login-button">Login</button>
             <div class="create-account">
-                <p>Don't have an account? <a href="/signup">Create Account</a></p>
+                <p>Don't have an account? <a href="/siqnup">Create Account</a></p>
             </div>
         </form>
     </div>

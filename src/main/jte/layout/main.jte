@@ -40,8 +40,11 @@
 <div class="navigation">
     <a href="agreement">Agreement</a>
     <a href="companie">Companie</a>
-    <a href="employer">Employer</a>
     <a href="companie/add">Add Company</a>
+
+    <a href="employer">Employer</a>
+    <a href="employer/add">Add Company</a>
+
 
 </div>
 ${content}

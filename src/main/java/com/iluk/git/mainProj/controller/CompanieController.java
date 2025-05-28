@@ -33,15 +33,20 @@ public class CompanieController {
             @RequestParam String activityType,
             @RequestParam String address,
             @RequestParam String phone) {
+        try {
+            Companie company = new Companie();
+            company.setName(name);
+            company.setActivityType(activityType);
+            company.setAddress(address);
+            company.setPhone(phone);
 
-        Companie company = new Companie();
-        company.setName(name);
-        company.setActivityType(activityType);
-        company.setAddress(address);
-        company.setPhone(phone);
+            companieRepository.save(company);
 
-        companieRepository.save(company);
+            return "redirect:/companie";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/companie";
+        }
 
-        return "redirect:/companie";
     }
 }
