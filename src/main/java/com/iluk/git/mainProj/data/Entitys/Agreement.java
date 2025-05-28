@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class Agreement {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long agreement_id;
 
     @ManyToOne

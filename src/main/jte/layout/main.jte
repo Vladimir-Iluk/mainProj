@@ -39,6 +39,7 @@
 <h1>Welcome to My Website</h1>
 <div class="navigation">
     <a href="agreement">Agreement</a>
+    <a href="agreement/add">Add agreement</a>
     <a href="companie">Companie</a>
     <a href="companie/add">Add Company</a>
 

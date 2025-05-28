@@ -28,10 +28,9 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/siqnup", "/login", "/error").permitAll()
+                        .requestMatchers("/", "/siqnup", "/login", "/error","agreement/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/employer/**").hasAuthority("EMPLOYER")
-
                         .requestMatchers("/companie/**").hasAuthority("COMPANY")
                         .requestMatchers("/companie/add").hasAuthority("COMPANY")
 
