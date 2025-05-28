@@ -30,7 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/siqnup", "/login", "/error").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/employer/**").hasAuthority("EMPLOYER")
+                        .requestMatchers("/employer/**").hasRole("EMPLOYER")
                         .requestMatchers("/company/**").hasAuthority("COMPANY")
                         .anyRequest().authenticated()
                 )

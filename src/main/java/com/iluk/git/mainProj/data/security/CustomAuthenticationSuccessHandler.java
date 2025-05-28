@@ -22,7 +22,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
                 response.sendRedirect("/admin/dashboard");
                 break;
             case "EMPLOYER":
-                response.sendRedirect("/index");
+                response.sendRedirect("/employer");
                 break;
             case "COMPANY":
                 response.sendRedirect("/companie");
