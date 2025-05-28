@@ -31,7 +31,9 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/siqnup", "/login", "/error").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/employer/**").hasRole("EMPLOYER")
-                        .requestMatchers("/company/**").hasAuthority("COMPANY")
+                        .requestMatchers("/companie/**").hasAuthority("COMPANY")
+                        .requestMatchers("/companie/add").hasAuthority("COMPANY")
+
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
