@@ -19,12 +19,12 @@ public class EmployerController {
     public EmployerController(EmployerRepository employerRepository) {
         this.employerRepository = employerRepository;
     }
-    @GetMapping("/employer")
+    /*@GetMapping("/employer")
     public String showEmplyoer(Model model) {
         var employers = employerRepository.findAll();
         model.addAttribute("empls", employers);
         return "page/employer";
-    }
+    }*/
     @GetMapping("/employer/add")
     public String showAddCompanieForm() {
         return "page/employerAdd";
@@ -106,5 +106,21 @@ public class EmployerController {
             e.printStackTrace();
             return "redirect:/employer";
         }
+    }
+    @GetMapping("/employer")
+    public String showEmplyoer(@RequestParam(required = false) String sort, Model model) {
+        Iterable<Employer> employers;
+        String sortDirection = (sort != null && sort.equals("asc")) ? "asc" : "desc";
+        if ("asc".equals(sort)) {
+            employers = employerRepository.findAllByOrderByEmployerIdAsc();
+        } else if ("desc".equals(sort)) {
+            employers = employerRepository.findAllByOrderByEmployerIdDesc();
+        } else {
+            employers = employerRepository.findAll();
+            sortDirection = "asc";
+        }
+        model.addAttribute("empls", employers);
+        model.addAttribute("sortDirection", sortDirection);
+        return "page/employer";
     }
 }

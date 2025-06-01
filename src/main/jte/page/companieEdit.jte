@@ -6,7 +6,7 @@ content = @`
     <div class="company-form-container">
         <h2>Edit Company</h2>
         <form action="/companie/edit" method="post" class="company-form">
-            <input type="hidden" name="id" value="${companie.getCompany_id()}">
+            <input type="hidden" name="id" value="${companie.getCompanyId()}">
 
             <div class="form-group">
                 <label for="name">Name:</label>

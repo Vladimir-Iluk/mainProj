@@ -21,12 +21,12 @@ public class AgreementController {
         this.companieRepository = companieRepository;
         this.employerRepository = employerRepository;
     }
-    @GetMapping("/agreement")
+    /*@GetMapping("/agreement")
     public String showAgreement(Model model) {
         var agreements = agreementRepository.findAll();
         model.addAttribute("agreementsList", agreements);
         return "page/agreement";
-    }
+    }*/
     @GetMapping("/agreement/add")
     public String showAddAgreementForm(Model model) {
         model.addAttribute("empls", employerRepository.findAll());
@@ -112,6 +112,22 @@ public class AgreementController {
             e.printStackTrace();
             return "redirect:/agreement";
         }
+    }
+    @GetMapping("/agreement")
+    public String showAgreement(@RequestParam(required = false) String sort, Model model) {
+        Iterable<Agreement> agreements;
+        String sortDirection = (sort != null && sort.equals("asc")) ? "asc" : "desc";
+        if ("asc".equals(sort)) {
+            agreements = agreementRepository.findAllByOrderByAgreementIdAsc();
+        } else if ("desc".equals(sort)) {
+            agreements = agreementRepository.findAllByOrderByAgreementIdDesc();
+        } else {
+            agreements = agreementRepository.findAll();
+            sortDirection = "asc";
+        }
+        model.addAttribute("agreementsList", agreements);
+        model.addAttribute("sortDirection", sortDirection);
+        return "page/agreement";
     }
 
 }

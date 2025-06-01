@@ -13,7 +13,7 @@ content = @`
                 <label for="employerId">Select Employer:</label>
                 <select id="employerId" name="employerId" class="form-control" required>
                     @for(Employer empl : empls)
-                        <option value="${empl.getEmployer_id()}">
+                        <option value="${empl.getEmployerId()}">
                             ${empl.getLastName()} ${empl.getFirstName()} (${empl.getQualification()})
                         </option>
                     @endfor
@@ -24,7 +24,7 @@ content = @`
                 <label for="companyId">Select Company:</label>
                 <select id="companyId" name="companyId" class="form-control" required>
                     @for(Companie comp : comps)
-                        <option value="${comp.getCompany_id()}">
+                        <option value="${comp.getCompanyId()}">
                             ${comp.getName()} (${comp.getActivityType()})
                         </option>
                     @endfor

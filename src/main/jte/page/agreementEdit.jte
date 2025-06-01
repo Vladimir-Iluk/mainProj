@@ -11,13 +11,13 @@ content = @`
     <div class="agreement-form-container">
         <h2>Edit Agreement</h2>
         <form action="/agreement/edit" method="post" class="agreement-form">
-            <input type="hidden" name="id" value="${agreement.getAgreement_id()}">
+            <input type="hidden" name="id" value="${agreement.getAgreementId()}">
 
             <div class="form-group">
                 <label for="employerId">Select Employer:</label>
                 <select id="employerId" name="employerId" class="form-control" required>
                     @for(Employer empl : empls)
-                        <option value="${empl.getEmployer_id()}" ${empl.getEmployer_id() == agreement.getEmpl().getEmployer_id() ? "selected" : ""}>
+                        <option value="${empl.getEmployerId()}" ${empl.getEmployerId() == agreement.getEmpl().getEmployerId() ? "selected" : ""}>
                             ${empl.getLastName()} ${empl.getFirstName()} (${empl.getQualification()})
                         </option>
                     @endfor
@@ -28,7 +28,7 @@ content = @`
                 <label for="companyId">Select Company:</label>
                 <select id="companyId" name="companyId" class="form-control" required>
                     @for(Companie comp : comps)
-                        <option value="${comp.getCompany_id()}" ${comp.getCompany_id() == agreement.getCompany().getCompany_id() ? "selected" : ""}>
+                        <option value="${comp.getCompanyId()}" ${comp.getCompanyId() == agreement.getCompany().getCompanyId() ? "selected" : ""}>
                             ${comp.getName()} (${comp.getActivityType()})
                         </option>
                     @endfor

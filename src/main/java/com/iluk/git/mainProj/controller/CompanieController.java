@@ -16,12 +16,12 @@ public class CompanieController {
     public CompanieController(CompanieRepository companieRepository) {
         this.companieRepository = companieRepository;
     }
-    @GetMapping("/companie")
+    /*@GetMapping("/companie")
     public String showCompanie(Model model) {
         var companies = companieRepository.findAll();
         model.addAttribute("comps", companies);
         return "page/companie";
-    }
+    }*/
     @GetMapping("/companie/add")
     public String showAddCompanieForm() {
         return "page/companieAdd";
@@ -91,4 +91,21 @@ public class CompanieController {
             return "redirect:/companie";
         }
     }
+    @GetMapping("/companie")
+    public String showCompanie(@RequestParam(required = false) String sort, Model model) {
+        Iterable<Companie> companies;
+        String sortDirection = (sort != null && sort.equals("asc")) ? "asc" : "desc";
+        if ("asc".equals(sort)) {
+            companies = companieRepository.findAllByOrderByCompanyIdAsc();
+        } else if ("desc".equals(sort)) {
+            companies = companieRepository.findAllByOrderByCompanyIdDesc();
+        } else {
+            companies = companieRepository.findAll();
+            sortDirection = "asc";
+        }
+        model.addAttribute("comps", companies);
+        model.addAttribute("sortDirection", sortDirection);
+        return "page/companie";
+    }
+
 }

@@ -6,11 +6,11 @@ content = @`
     <div class="employer-form-container">
         <h2>Edit Employer</h2>
         <form action="/employer/edit" method="post" class="employer-form">
-            <input type="hidden" name="id" value="${empl.getEmployer_id()}">
+            <input type="hidden" name="id" value="${empl.getEmployerId()}">
 
             <div class="form-group">
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" value="${empl.getEmployer_id()}" required class="form-control">
+                <input type="text" id="lastName" name="lastName" value="${empl.getEmployerId()}" required class="form-control">
             </div>
 
             <div class="form-group">

@@ -1,12 +1,20 @@
 @import com.iluk.git.mainProj.data.Entitys.Employer
 @import java.util.List
 @param List<Employer> empls
+@param String sortDirection
 
 @template.layout.main(
 content = @`
     <div class="container">
         <h2>Employers List</h2>
         <a href="/employer/add" class="btn-add">Add New Employer</a>
+        <div class="sort-container">
+            <span class="sort-label">Sort by ID:</span>
+            <a href="/employer?sort=${sortDirection == "asc" ? "desc" : "asc"}" class="btn-sort">
+                ${sortDirection == "asc" ? "▼ Descending" : "▲ Ascending"}
+            </a>
+
+        </div>
         <table class="data-table">
             <thead>
             <tr>
@@ -22,15 +30,15 @@ content = @`
             <tbody>
             @for(Employer employer : empls)
                 <tr>
-                    <td>${employer.getEmployer_id()}</td>
+                    <td>${employer.getEmployerId()}</td>
                     <td>${employer.getLastName()}</td>
                     <td>${employer.getFirstName()}</td>
                     <td>${employer.getMiddleName()}</td>
                     <td>${employer.getQualification()}</td>
                     <td>${employer.getExpectedSalary()}</td>
                     <td>
-                        <a href="/employer/edit?id=${employer.getEmployer_id()}" class="btn-edit">Edit</a>
-                        <a href="/employer/delete?id=${employer.getEmployer_id()}" class="btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
+                        <a href="/employer/edit?id=${employer.getEmployerId()}" class="btn-edit">Edit</a>
+                        <a href="/employer/delete?id=${employer.getEmployerId()}" class="btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
                     </td>
                 </tr>
             @endfor
@@ -54,6 +62,31 @@ headContent = @`
             margin-bottom: 20px;
             text-decoration: none;
             border-radius: 4px;
+        }
+
+        .sort-container {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sort-label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .btn-sort {
+            display: inline-block;
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-sort:hover {
+            background-color: #5a6268;
         }
 
         .data-table {

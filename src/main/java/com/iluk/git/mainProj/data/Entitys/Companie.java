@@ -18,8 +18,8 @@ public class Companie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long company_id;
-
+    @Column(name = "company_id")
+    private Long companyId;
     private String name;
 
     @Column(name = "activity_type")

@@ -14,7 +14,9 @@ public class Agreement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long agreement_id;
+    @Column(name = "agreement_id")
+    private Long agreementId;
+
 
     @ManyToOne
     @JoinColumn(name = "employer_id", nullable = false)

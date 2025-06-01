@@ -14,8 +14,8 @@ public class Employer  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employer_id;
-
+    @Column(name = "employer_id")
+    private Long employerId;
     @Column(name = "last_name")
     private String lastName;
 
