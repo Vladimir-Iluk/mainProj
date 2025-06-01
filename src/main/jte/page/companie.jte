@@ -2,7 +2,7 @@
 @import java.util.List
 @param List<Companie> comps
 @param String sortDirection
-
+@param String searchTerm
 @template.layout.main(
 content = @`
     <div class="container">
@@ -13,6 +13,14 @@ content = @`
             <a href="/companie?sort=${sortDirection == "asc" ? "desc" : "asc"}" class="btn-sort">
                 ${sortDirection == "asc" ? "▼ Descending" : "▲ Ascending"}
             </a>
+        </div>
+        <div class="search-container">
+            <form action="/companie" method="get">
+                <input type="text" name="search" placeholder="Search across all fields..."
+                       value="${searchTerm != null ? searchTerm : ""}">
+                <button type="submit" class="btn-search">Search</button>
+                <a href="/companie" class="btn-clear">Clear</a>
+            </form>
         </div>
         <table class="data-table">
             <thead>
@@ -44,7 +52,6 @@ content = @`
     </div>
 `,
 headContent = @`
-    <!-- Стили такие же как в agreement.html -->
     <style>
         .container {
             max-width: 1200px;
@@ -125,6 +132,43 @@ headContent = @`
         }
 
         .btn-delete:hover {
+            background-color: #d32f2f;
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+        }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .btn-search {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .btn-clear {
+            padding: 8px 15px;
+            margin-left: 10px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .btn-search:hover {
+            background-color: #45a049;
+        }
+
+        .btn-clear:hover {
             background-color: #d32f2f;
         }
     </style>

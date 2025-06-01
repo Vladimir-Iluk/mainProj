@@ -108,10 +108,17 @@ public class EmployerController {
         }
     }
     @GetMapping("/employer")
-    public String showEmplyoer(@RequestParam(required = false) String sort, Model model) {
+    public String showEmplyoer(
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String search,
+            Model model) {
+
         Iterable<Employer> employers;
         String sortDirection = (sort != null && sort.equals("asc")) ? "asc" : "desc";
-        if ("asc".equals(sort)) {
+
+        if (search != null && !search.isEmpty()) {
+            employers = employerRepository.searchAcrossAllFields(search);
+        } else if ("asc".equals(sort)) {
             employers = employerRepository.findAllByOrderByEmployerIdAsc();
         } else if ("desc".equals(sort)) {
             employers = employerRepository.findAllByOrderByEmployerIdDesc();
@@ -119,8 +126,10 @@ public class EmployerController {
             employers = employerRepository.findAll();
             sortDirection = "asc";
         }
+
         model.addAttribute("empls", employers);
         model.addAttribute("sortDirection", sortDirection);
+        model.addAttribute("searchTerm", search);
         return "page/employer";
     }
 }

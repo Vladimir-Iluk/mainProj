@@ -2,6 +2,7 @@
 @import java.util.List
 @param List<Employer> empls
 @param String sortDirection
+@param String searchTerm
 
 @template.layout.main(
 content = @`
@@ -14,6 +15,14 @@ content = @`
                 ${sortDirection == "asc" ? "▼ Descending" : "▲ Ascending"}
             </a>
 
+        </div>
+        <div class="search-container">
+            <form action="/employer" method="get">
+                <input type="text" name="search" placeholder="Search across all fields..."
+                       value="${searchTerm != null ? searchTerm : ""}">
+                <button type="submit" class="btn-search">Search</button>
+                <a href="/employer" class="btn-clear">Clear</a>
+            </form>
         </div>
         <table class="data-table">
             <thead>
@@ -127,6 +136,43 @@ headContent = @`
         }
 
         .btn-delete:hover {
+            background-color: #d32f2f;
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+        }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .btn-search {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .btn-clear {
+            padding: 8px 15px;
+            margin-left: 10px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .btn-search:hover {
+            background-color: #45a049;
+        }
+
+        .btn-clear:hover {
             background-color: #d32f2f;
         }
     </style>

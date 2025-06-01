@@ -92,10 +92,17 @@ public class CompanieController {
         }
     }
     @GetMapping("/companie")
-    public String showCompanie(@RequestParam(required = false) String sort, Model model) {
+    public String showCompanie(
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String search,
+            Model model) {
+
         Iterable<Companie> companies;
         String sortDirection = (sort != null && sort.equals("asc")) ? "asc" : "desc";
-        if ("asc".equals(sort)) {
+
+        if (search != null && !search.isEmpty()) {
+            companies = companieRepository.searchAcrossAllFields(search);
+        } else if ("asc".equals(sort)) {
             companies = companieRepository.findAllByOrderByCompanyIdAsc();
         } else if ("desc".equals(sort)) {
             companies = companieRepository.findAllByOrderByCompanyIdDesc();
@@ -103,8 +110,10 @@ public class CompanieController {
             companies = companieRepository.findAll();
             sortDirection = "asc";
         }
+
         model.addAttribute("comps", companies);
         model.addAttribute("sortDirection", sortDirection);
+        model.addAttribute("searchTerm", search);
         return "page/companie";
     }
 

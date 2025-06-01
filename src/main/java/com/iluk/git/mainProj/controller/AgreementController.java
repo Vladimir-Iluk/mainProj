@@ -114,10 +114,17 @@ public class AgreementController {
         }
     }
     @GetMapping("/agreement")
-    public String showAgreement(@RequestParam(required = false) String sort, Model model) {
+    public String showAgreement(
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String search,
+            Model model) {
+
         Iterable<Agreement> agreements;
         String sortDirection = (sort != null && sort.equals("asc")) ? "asc" : "desc";
-        if ("asc".equals(sort)) {
+
+        if (search != null && !search.isEmpty()) {
+            agreements = agreementRepository.searchAcrossAllFields(search);
+        } else if ("asc".equals(sort)) {
             agreements = agreementRepository.findAllByOrderByAgreementIdAsc();
         } else if ("desc".equals(sort)) {
             agreements = agreementRepository.findAllByOrderByAgreementIdDesc();
@@ -125,8 +132,10 @@ public class AgreementController {
             agreements = agreementRepository.findAll();
             sortDirection = "asc";
         }
+
         model.addAttribute("agreementsList", agreements);
         model.addAttribute("sortDirection", sortDirection);
+        model.addAttribute("searchTerm", search);
         return "page/agreement";
     }
 
